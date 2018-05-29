@@ -49,4 +49,67 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                 'uses' => 'UserController@detail'
                 ]);
     
+    //Book
+    Route::get('/books',
+                ['as' => 'books.index', 
+                'uses' =>'BookController@index']);
+    Route::get('/books/create', [
+                'as' => 'books.create',
+                'uses' => 'BookController@create'
+                ]);
+    Route::post('books/create',
+                ['as' => 'books.create.post', 
+                'uses' => 'BookController@postCreate'
+                ]);
+    Route::get('books/edit',
+                ['as' => 'books.create.edit', 
+                'uses' => 'BookController@getEdit'
+                ]);
+    Route::post('books/edit',
+                ['as' => 'books.create.post', 
+                'uses' => 'BookController@update'
+                ]);
+    Route::get('/books/delete/{id}' ,
+                ['as' => 'books.delete',
+                'uses' => 'BookController@destroy'
+                ]);
+    Route::get('/books/detail' ,
+                ['as' => 'books.detail',
+                'uses' => 'BookController@detail'
+                ]);
+    //categories
+    Route::get('/categories',
+                ['as' =>'categories.index',
+                'uses'=>'CategoryController@index'
+                ]);
+    Route::get('/categories/create',
+                ['as' =>'categories.create',
+                'uses'=>'CategoryController@create'
+                ]);
+    Route::post('/categories/create',
+                ['as' =>'categories.create.post',
+                'uses'=>'CategoryController@postCreate'
+                ]);
+    Route::get('/categories/edit',
+                ['as' =>'categories.edit',
+                'uses'=>'CategoryController@edit'
+                ]);
+    Route::post('/categories/edit',
+                ['as' =>'categories.edit.post',
+                'uses'=>'CategoryController@update'
+                ]);
+    Route::get('/categories/delete/{id}',
+                ['as' =>'categories.delete',
+                'uses'=>'CategoryController@detroys'
+                ]);
+
+    //book_copy
+    Route::get('/provide',
+                ['as' => 'provide.index', 
+                'uses' => 'BookCopyController@index'
+                ]);   
+    Route::post('/provide',
+                ['as' => 'provide.update', 
+                'uses' => 'BookCopyController@update'
+                ]);              
 });

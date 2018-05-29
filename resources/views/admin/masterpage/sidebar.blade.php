@@ -13,6 +13,12 @@
 					<a href="{{ URL::asset('/users') }}" class="dropdown-toggle">
 						<span class="fa fa-user"></span><span class="mtext">User</span>
 					</a>
+					<a href="{{ URL::asset('/categories') }}" class="dropdown-toggle">
+						<span class="fa fa-bars"></span><span class="mtext">Category</span>
+					</a>
+					<a href="{{ URL::asset('/books') }}" class="dropdown-toggle">
+						<span class="fa fa-book"></span><span class="mtext">Book</span>
+					</a>
 					
 				</ul>
 			</div>

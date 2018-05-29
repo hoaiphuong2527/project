@@ -17,4 +17,14 @@ class Order extends Model
         'flag'
     ];
     protected $guarded = []; 
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function book()
+    {
+        return $this->belongsToMany('App\Models\Book');
+    }
 }

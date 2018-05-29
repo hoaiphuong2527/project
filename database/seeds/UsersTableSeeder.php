@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->truncate();
-        App\User::create([
+        App\Models\User::create([
         	'name' => 'hoaiphuong',
         	'email' =>'hoaiphuong2527@gmail.com',
             'password' => bcrypt('123Admin'),

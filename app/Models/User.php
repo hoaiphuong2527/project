@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Events\ModelObserver;
-use Wildside\Userstamps\Userstamps;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $table = 'users';
 
@@ -38,14 +38,18 @@ class User extends Model
         $user->delete();
     }
     
-    public function books()
+    public function book()
     {
-        return $this->hasMany('App\Models\Book');
+        return $this->belongsToMany('App\Models\Book');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Oders');
     }
 
     public static function boot() {
         parent::boot();
-        User::observe(new ModelObserver());
     }
 	
 }

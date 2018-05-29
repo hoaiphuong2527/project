@@ -9,9 +9,9 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $primaryKey = 'id';
-    
+
     protected $fillable = [
-        'name'
+        'name',       
     ];
     protected $guarded = []; 
 
@@ -19,4 +19,16 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Book');
     }
+    
+    public function destroyCate($id)
+	{
+		$obj = Category::find((int) $id);
+        $obj->delete();
+    }
+
+    public function findCate($id)
+    {
+        return Category::find((int) $id);
+    }
+
 }

@@ -14,18 +14,31 @@ class Book extends Model
         'title',
         'author',
         'category_id',
-        'amount',
-        'user_id'
+        'type',
     ];
     protected $guarded = []; 
 
-    public function user()
+
+    public function findBook($id)
     {
-        return $this->belongsTo('App\Models\User');
+        return Book::find((int) $id);
     }
 
-    public function category()
-    {
-        return $this->belongsTo('App\Models\Category');
+    public function destroyBook($id)
+	{
+		$obj = Book::find((int) $id);
+        $obj->delete();
     }
+
+    public function user()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
+
+    public function order()
+    {
+        return $this->belongsToMany('App\Models\Order');
+    }
+
+    
 }

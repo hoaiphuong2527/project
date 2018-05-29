@@ -3,12 +3,12 @@
 
 <div class="row clearfix progress-box">
    <div class="col-lg-6 col-md-6 col-sm-12 mb-30 pd-20 bg-white border-radius-4 box-shadow mb-30">
-   <h4 class="text-blue">User's information</h4>
-   <hr>
+        <h4 class="text-blue">User's information</h4>
+        <hr>
         <div class="form-group row">
             <label class="col-sm-12 col-md-3 col-form-label">Username</label>
             <lable class="col-sm-12 col-md-9" style="margin-top: 3px;">
-                {{$user->name}}
+                {{ $user->name }}
             </lable>
         </div>
         <div class="form-group row">
