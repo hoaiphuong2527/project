@@ -28,7 +28,7 @@ class Book_User extends Model
 
     public function getItemFlagIsFalse()
     {
-        return Book_User::select("book_id")->where('flag',0)->get();
+        return Book_User::select("book_id")->where('flag',0)->distinct()->get();
     }
 
 }

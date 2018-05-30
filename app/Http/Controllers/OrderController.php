@@ -42,7 +42,7 @@ class OrderController extends Controller
             $request->all(),
             [
                 'user'                  => 'required',
-                'book'                  => 'required'
+                'book[]'                  => 'required'
             ]
             ,
             [
@@ -66,11 +66,11 @@ class OrderController extends Controller
                 'book_copy_id'  => 1
             ]);
 
-            // //update flag khi 
-            // //find book with id->first()->update flag => 1
+            //find book with id->first()->update flag => 1
             // $book_user = Book_User::where("id",$item->book_copy_id)->first();
-            // $book_user->flag = 1
+            // $book_user->flag = 1;
             // $book_user->save();
+
             return redirect('/orders')->with('notify-success', 'Thêm cate thành công');
         }
     }
@@ -89,5 +89,7 @@ class OrderController extends Controller
     {
         # code...
     }
+
+    
 
 }
