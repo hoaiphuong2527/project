@@ -16,3 +16,4 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="{!! URL::asset('admin/css/bootstrap.min.css') !!}">
 	<link rel="stylesheet" href="{!! URL::asset('admin/css/style.css') !!}">
+	<link rel="stylesheet" href="{!! URL::asset('css/app.css') !!}">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,13 @@ class Item extends Model
 
     protected $fillable = [
         'order_id',
-        'book_id'
+        'book_copy_id'
     ];
     protected $guarded = []; 
+
+    
+    public function getItemById($order_id)
+    {
+        return Item::where('order_id',$order_id)->get();
+    }
 }

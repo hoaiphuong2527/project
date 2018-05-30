@@ -19,6 +19,9 @@
 					<a href="{{ URL::asset('/books') }}" class="dropdown-toggle">
 						<span class="fa fa-book"></span><span class="mtext">Book</span>
 					</a>
+					<a href="{{ URL::asset('/orders') }}" class="dropdown-toggle">
+						<span class="fa fa-pencil"></span><span class="mtext">Order</span>
+					</a>
 					
 				</ul>
 			</div>

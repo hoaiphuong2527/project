@@ -40,13 +40,14 @@ class User extends Authenticatable
     
     public function book()
     {
-        return $this->belongsToMany('App\Models\Book');
+        return $this->belongsToMany('App\Models\Book')->withPivot('flag');
     }
 
     public function orders()
     {
         return $this->hasMany('App\Models\Oders');
     }
+    
 
     public static function boot() {
         parent::boot();

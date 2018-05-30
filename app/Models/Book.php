@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Book_User;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
@@ -15,6 +16,7 @@ class Book extends Model
         'author',
         'category_id',
         'type',
+        'amount',
     ];
     protected $guarded = []; 
 
@@ -32,12 +34,17 @@ class Book extends Model
 
     public function user()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User')->withPivot('flag');
+        ;
     }
 
-    public function order()
+
+    public function getBookByFlag()
     {
-        return $this->belongsToMany('App\Models\Order');
+        $obj = new Book_User();
+
+       return $list_obj_flag_false = $obj->getItemFlagIsFalse();
+
     }
 
     

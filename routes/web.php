@@ -62,7 +62,7 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                 'uses' => 'BookController@postCreate'
                 ]);
     Route::get('books/edit',
-                ['as' => 'books.create.edit', 
+                ['as' => 'books.edit', 
                 'uses' => 'BookController@getEdit'
                 ]);
     Route::post('books/edit',
@@ -112,4 +112,34 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                 ['as' => 'provide.update', 
                 'uses' => 'BookCopyController@update'
                 ]);              
+
+    //order
+    Route::get('/orders',
+                ['as' => 'orders.index', 
+                'uses' => 'OrderController@index'
+                ]);
+    Route::get('/orders/create',
+                ['as' => 'orders.create', 
+                'uses' => 'OrderController@create'
+                ]);
+    Route::post('/orders/create',
+                ['as' => 'orders.create.post', 
+                'uses' => 'OrderController@postCreate'
+                ]);
+    Route::get('/orders/edit',
+                ['as' => 'orders.edit', 
+                'uses' => 'OrderController@edit'
+                ]);
+    Route::post('/orders/edit',
+                ['as' => 'orders.update', 
+                'uses' => 'OrderController@update'
+                ]);
+    Route::get('/orders/delete',
+                ['as' => 'orders.delete',
+                'uses' => 'OrderController@delete'
+                ]);
+    Route::get('orders/search', [
+                    'as' => 'orders.search',
+                    'uses' => 'OrderController@search'
+                ]);
 });
