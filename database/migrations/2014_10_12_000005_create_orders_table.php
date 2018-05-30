@@ -15,10 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('take_date');
-            $table->dateTime('expired_date');
-            $table->unsignedInteger('borrower_id');
-            $table->integer('status');          //0: Dang muon, 1: Da tra, 2: Da that lac
+            $table->timestamp('order_date')->useCurrent(); //Ngay muon sach
+            $table->dateTime('expired_date'); //Ngay phai tra
+            $table->dateTime('return_date')->nullable()->default(null); //Ngay tra thuc te
+            $table->unsignedInteger('borrower_id')->nullable()->default(null);
+            $table->integer('status')->default(0);          //0: Dang muon, 1: Da tra, 2: Da that lac
             $table->timestamps();
             $table->unsignedInteger('created_by')->nullable()->default(null);
             $table->unsignedInteger('updated_by')->nullable()->default(null);

@@ -15,8 +15,8 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('order_id');
-            $table->unsignedInteger('book_item_id');
+            $table->unsignedInteger('order_id')->nullable()->default(null);
+            $table->unsignedInteger('book_item_id')->nullable()->default(null);
             $table->integer('status'); //0: Dang muon, 1: Da tra, 2: That lac
             $table->timestamps();
             $table->unsignedInteger('created_by')->nullable()->default(null);

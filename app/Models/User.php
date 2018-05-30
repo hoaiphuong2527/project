@@ -22,6 +22,11 @@ class User extends Authenticatable
     ];
     protected $guarded = []; 
 
+    // public function username()
+    // {
+    //     return 'username';
+    // }
+
     public function orders()
     {
         return $this->hasMany('App\Models\Orders');

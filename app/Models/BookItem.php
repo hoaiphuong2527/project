@@ -2,33 +2,22 @@
 
 namespace App\Models;
 
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class BookItem extends Model
+class BookItem extends BaseModel
 {
     protected $table = 'book_items';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id',
-        'book_id',
+        'book_id'
     ];
     protected $guarded = []; 
 
-    public function order()
+    public function book()
     {
-        return $this->belongsToMany('App\Models\Order');
+        return $this->belongsTo('App\Models\Book', 'book_id');
     }
-
-    public function countBook($id)
-    {
-        return Book_User::where('book_id', $id)->where('flag',0)->count();
-    }
-
-    public function getItemFlagIsFalse()
-    {
-        return Book_User::select("book_id")->where('flag',0)->distinct()->get();
-    }
-
 }

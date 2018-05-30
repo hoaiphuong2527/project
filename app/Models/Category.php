@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Category extends BaseModel
 {
     protected $table = 'categories';
 
@@ -17,18 +18,6 @@ class Category extends Model
 
     public function books()
     {
-        return $this->hasMany('App\Models\Book');
+        return $this->hasMany('App\Models\Book', 'category_id', 'id');
     }
-    
-    public function destroyCate($id)
-	{
-		$obj = Category::find((int) $id);
-        $obj->delete();
-    }
-
-    public function findCate($id)
-    {
-        return Category::find((int) $id);
-    }
-
 }

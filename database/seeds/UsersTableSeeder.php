@@ -11,9 +11,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
-        App\Models\User::create([
-        	'name' => 'hoaiphuong',
+        DB::table('users')->insert([
+            'username' => 'hoaiphuong',
         	'email' =>'hoaiphuong2527@gmail.com',
             'password' => bcrypt('123Admin'),
             'phone'     => '1234567',

@@ -17,21 +17,10 @@ class Book extends BaseModel
         'category_id',
         'type'
     ];
+    
     protected $guarded = []; 
 
-    public function user()
-    {
-        return $this->belongsToMany('App\Models\User')->withPivot('flag');
-        ;
+    public function bookItems() {
+        return $this->hasMany('App\Models\BookItems', 'book_id', 'id');
     }
-    
-    public function getBookByFlag()
-    {
-        $obj = new Book_User();
-
-       return $list_obj_flag_false = $obj->getItemFlagIsFalse();
-
-    }
-
-    
 }

@@ -15,7 +15,8 @@ class CreateBookItemTable extends Migration
     {
         Schema::create('book_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('book_id');
+            $table->unsignedInteger('book_id')->nullable()->default(null);
+            $table->timestamp('stock_date')->useCurrent();
             $table->timestamps();
             $table->unsignedInteger('created_by')->nullable()->default(null);
             $table->unsignedInteger('updated_by')->nullable()->default(null);
