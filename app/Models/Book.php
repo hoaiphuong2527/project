@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Book_User;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Book extends BaseModel
 {
     protected $table = 'books';
 
@@ -15,30 +15,16 @@ class Book extends Model
         'title',
         'author',
         'category_id',
-        'type',
-        'amount',
+        'type'
     ];
     protected $guarded = []; 
-
-
-    public function findBook($id)
-    {
-        return Book::find((int) $id);
-    }
-
-    public function destroyBook($id)
-	{
-		$obj = Book::find((int) $id);
-        $obj->delete();
-    }
 
     public function user()
     {
         return $this->belongsToMany('App\Models\User')->withPivot('flag');
         ;
     }
-
-
+    
     public function getBookByFlag()
     {
         $obj = new Book_User();

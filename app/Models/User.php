@@ -22,35 +22,17 @@ class User extends Authenticatable
     ];
     protected $guarded = []; 
 
-    public function getAll()
-    {
-        return User::all();
-    }
-
-    public function findUser($id)
-    {
-        return User::find((int) $id);
-    }
-
-    public function destroyUser($id)
-	{
-		$user = User::find((int) $id);
-        $user->delete();
-    }
-    
-    public function book()
-    {
-        return $this->belongsToMany('App\Models\Book')->withPivot('flag');
-    }
-
     public function orders()
     {
-        return $this->hasMany('App\Models\Oders');
+        return $this->hasMany('App\Models\Orders');
+    }
+
+    public function books()
+    {
+        return $this->hasMany('App\Models\BookItem', '');
     }
     
-
     public static function boot() {
         parent::boot();
     }
-	
 }
