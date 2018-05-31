@@ -17,6 +17,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<!-- CSS -->
-	<link rel="stylesheet" href="{!! URL::asset('admin/css/bootstrap.min.css') !!}">
+	<link rel="stylesheet" href="{!! URL::asset('css/bootstrap.min.css') !!}">
 	<link rel="stylesheet" href="{!! URL::asset('admin/css/style.css') !!}">
 	<link rel="stylesheet" href="{!! URL::asset('css/app.css') !!}">

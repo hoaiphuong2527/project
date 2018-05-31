@@ -21,7 +21,7 @@ class UserController extends Controller
 
         if($name)
         {
-            $search_query->Where('name', 'like', '%'.$name.'%');
+            $search_query->Where('username', 'like', '%'.$name.'%');
         }
         if($email)
         {
@@ -52,7 +52,7 @@ class UserController extends Controller
             [
                 'email'                  => 'required|email|unique:users,email|regex:/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/',
                 'phone'                  => 'required|digits_between:10,15|numeric',
-                'name'                   => 'required|min:6|max:30',
+                'name'                   => 'required|min:6|max:30|unique:users,username',
                 'password'               => 'required|min:6|regex:/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/|confirmed',    
                 'role'                   => 'required',
             ]
@@ -72,7 +72,7 @@ class UserController extends Controller
                 [
                 "email"          =>$email, 
                 "phone"          =>$phone_num, 
-                "name"           =>$name,
+                "username"           =>$name,
                 "password"       =>$password,  
                 "user_role"      =>$user_role,
                 ]);
@@ -84,9 +84,9 @@ class UserController extends Controller
     public function getEdit(Request $request)
     {
         $id = $request->id;
-        $user = new User();
+        $user = User::find((int) $id);
         $this->roles = config('admin-book.role');
-        return view('admin.users.edit', ['user' => $user->findUser((int) $id), 'roles' =>  $this->roles]);
+        return view('admin.users.edit', ['user' => $user, 'roles' =>  $this->roles]);
     }
 
     public function postEdit(Request $request, UserRepository $userRepository)
@@ -111,7 +111,7 @@ class UserController extends Controller
                 $userRepository->update(
                     [
                     "phone" => $request->get('phone'),
-                    "name" => $request->get('name'),
+                    "username" => $request->get('name'),
                     "user_role" => $request->get('role')
                     ], 
                     (int) $id,
@@ -125,7 +125,7 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'password'          => 'required|min:6|regex:/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/|confirmed',
                 'phone'             => 'required|digits_between:10,15|numeric',
-                'name'              => 'required|min:6|max:30',
+                'name'              => 'required|min:6|max:30||unique:users,username',
     
                 ],
                 [ 
@@ -140,7 +140,7 @@ class UserController extends Controller
                 $userRepository->update(
                     [
                     "phone" => $request->get('phone'),
-                    "name" => $request->get('name'),
+                    "username" => $request->get('name'),
                     "user_role" => $request->get('role'),
                     "password"  =>  $request->get('password'),
                     ], 
@@ -155,16 +155,16 @@ class UserController extends Controller
     public function delete(Request $request)
     {
         $id = $request->id;
-        $user = new User();
-        $user->destroyUser((int) $id);
+        $user = User::find((int) $id);
+        $user->delete();
         return redirect('/users');
     }
 
     public function detail(Request $request, UserRepository $userRepository)
     {
        $id = $request->id;
-       $user = new User();
+       $user = User::find((int) $id);
         $this->roles = config('admin-book.role');
-        return view('admin.users.detail', ['user' => $user->findUser((int) $id), 'roles' =>  $this->roles]);
+        return view('admin.users.detail', ['user' => $user, 'roles' =>  $this->roles]);
     }
 }

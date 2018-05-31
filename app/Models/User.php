@@ -13,7 +13,7 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
         'phone',
@@ -29,12 +29,12 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany('App\Models\Orders');
+        return $this->hasMany('App\Models\Orders','borrower_id');
     }
 
     public function books()
     {
-        return $this->hasMany('App\Models\BookItem', '');
+        return $this->hasMany('App\Models\BookItem');
     }
     
     public static function boot() {

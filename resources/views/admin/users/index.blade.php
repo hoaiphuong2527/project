@@ -23,7 +23,7 @@
                         <td><a href="{{ URL::route('user.detail', ['id' => $row->id,
                                                                         '_token' => csrf_token()
                                                                     ])
-                                    }}" class="text-blue">{{ $row->name }}</a></td>
+                                    }}" class="text-blue">{{ $row->username }}</a></td>
                         <td>{{ $row->email }} </td>
                         <td>{{ $row->phone }}</td>
                         <td  class="text-center">

@@ -23,7 +23,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-3 col-form-label">Username</label>
                 <div class="col-sm-12 col-md-9">
-                    <input name="name" class="form-control" type="text" placeholder="Johnny Brown" value="{{ old('name', $user->name) }}">
+                    <input name="name" class="form-control" type="text" placeholder="Johnny Brown" value="{{ old('name', $user->username) }}">
                 </div>
             </div>
             <div class="form-group row">

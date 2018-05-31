@@ -20,4 +20,15 @@ class BookItem extends BaseModel
     {
         return $this->belongsTo('App\Models\Book', 'book_id');
     }
+
+    public function orderItems()
+    {
+        return $this->hasMany('App\Models\OrderItem', 'book_item_id', 'id');
+    }
+
+    public function countBookById($id)
+    {
+        return BookItem::where('book_id',$id)->count();
+    }
+    
 }

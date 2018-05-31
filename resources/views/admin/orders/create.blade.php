@@ -30,41 +30,54 @@
                 <div class="col-sm-12 col-md-10">
                     <select class="custom-select form-control" name="user">
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}" @if (old('user') == $user->id) selected @endif>{{$user->name}}</option>
+                            <option value="{{ $user->id }}" @if (old('user') == $user->id) selected @endif>{{$user->username}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <br>
-            <table class="table table-bordered" style = "width:80%; margin:auto;">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Book</th>
-                <th scope="col">Author</th>
-                <th scope="col" class="text-center">Choose</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($lists as $row)   
-                    <tr book-id="{{ $row }}">
-                        <td>{{ $row->book_id }}</td>
-                        <td><a href="{{ URL::route('orders.create', ['id' => $row->id,
-                                                                        '_token' => csrf_token()
-                                                                    ])
-                                    }}" class="text-blue"></a>{{ Book::find($row->book_id)->title }}</td>
-                        <td>{{ Book::find($row->book_id)->author }}
-                        </ul>
-                        </td>
-                        <td class="text-center" name="book[]">
-                            <input type="checkbox" value=" {{ $row->id }}"><br>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            <div class="form-group row" style = "width:80%; margin:auto;">
+                <label class="col-sm-12 col-md-2 col-form-label text-blue">Search book</label>
+                <div class="col-sm-12 col-md-10">
+                    <input class="form-control" id="search" name="search" value="">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+            <label class="col-sm-12 col-md-3 col-form-label"></label>
+                <div class="col-sm-12 col-md-10" style = "width:80%; margin:auto;" >
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
         </form>					
    </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    function fetch_data(query = '')
+    {
+    $.ajax({
+    url:"{{ route('orders.search') }}",
+    method:'GET',
+    data:{query:query},
+    dataType:'json',
+    success:function(data)
+    {
+        $('tbody').html(data.table_data);
+    }
+    })
+    }
+    $(document).on('keyup', '#search', function(){
+    var query = $(this).val();
+    fetch_data(query);
+    });
+    });
+</script>
 
 @endsection

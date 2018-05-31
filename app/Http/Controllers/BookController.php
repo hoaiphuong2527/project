@@ -69,7 +69,7 @@ class BookController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title'                  => 'required|min:6|max:30',
+                'title'                  => 'required|min:6|max:30|unique:books,title',
                 'author'                 => 'required|min:6|max:30',
                 'category'               => 'required',    
                 'type'                   => 'required',
@@ -107,9 +107,9 @@ class BookController extends Controller
     public function detail(Request $request, BookRepository $bookRepository)
     {
         $id = $request->id;
-        $obj = new Book();
+        $obj = Book::find((int) $id);
         $types = config('admin-book.type');
-        return view('admin.books.detail', ['book' => $obj->findBook((int) $id), 'types' =>  $types]);
+        return view('admin.books.detail', ['book' => $obj, 'types' =>  $types]);
     }
 
     /**
@@ -121,10 +121,10 @@ class BookController extends Controller
     public function getEdit(Request $request, BookRepository $bookRepository)
     {
         $id = $request->id;
-        $obj = new Book();
+        $obj = Book::find((int) $id);
         $categories = Category::all();
         $types = config('admin-book.type');
-        return view('admin.books.edit', ['book' => $obj->findBook((int) $id), 'types' =>  $types,'categories'    => $categories,]);
+        return view('admin.books.edit', ['book' => $obj, 'types' =>  $types,'categories'    => $categories,]);
 
     }
 
@@ -140,7 +140,7 @@ class BookController extends Controller
         $id = $request->id;
         $obj = new Book();
         $validator = Validator::make($request->all(), [
-            'title'                  => 'required|min:6|max:30',
+            'title'                  => 'required|min:6|max:30|unique:books,title',
             'author'                 => 'required|min:6|max:30',
             'category'               => 'required',    
             'type'                   => 'required',
@@ -177,8 +177,8 @@ class BookController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        $obj = new Book();
-        $obj->destroyBook((int) $id);
+        $obj = Book::find((int) $id);
+        $obj->delete();
         return redirect('/books');
     }
 }

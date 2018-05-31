@@ -17,6 +17,7 @@ class CreateBookItemTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('book_id')->nullable()->default(null);
             $table->timestamp('stock_date')->useCurrent();
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->unsignedInteger('created_by')->nullable()->default(null);
             $table->unsignedInteger('updated_by')->nullable()->default(null);

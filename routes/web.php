@@ -103,16 +103,19 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                 'uses'=>'CategoryController@detroys'
                 ]);
 
-    //book_copy
+    //book_item
     Route::get('/provide',
                 ['as' => 'provide.index', 
-                'uses' => 'BookCopyController@index'
+                'uses' => 'BookItemController@index'
                 ]);   
+    Route::get('/provide/search_book',
+                ['as' => 'provide.search', 
+                'uses' => 'BookItemController@search'
+                ]); 
     Route::post('/provide',
-                ['as' => 'provide.update', 
-                'uses' => 'BookCopyController@update'
-                ]);              
-
+                ['as' => 'provide.create', 
+                'uses' => 'BookItemController@create'
+                ]);            
     //order
     Route::get('/orders',
                 ['as' => 'orders.index', 
@@ -138,7 +141,7 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                 ['as' => 'orders.delete',
                 'uses' => 'OrderController@delete'
                 ]);
-    Route::get('orders/search', [
+    Route::get('/orders/search', [
                     'as' => 'orders.search',
                     'uses' => 'OrderController@search'
                 ]);

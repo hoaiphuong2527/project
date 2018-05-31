@@ -21,6 +21,6 @@ class Book extends BaseModel
     protected $guarded = []; 
 
     public function bookItems() {
-        return $this->hasMany('App\Models\BookItems', 'book_id', 'id');
+        return $this->hasMany('App\Models\BookItem', 'book_id', 'id');
     }
 }

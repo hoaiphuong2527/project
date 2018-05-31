@@ -1,6 +1,6 @@
 @extends('admin.masterpage.masterpage')
 @section('content')
-<?php use App\Models\Book_User; ?>
+<?php use App\Models\BookItem; ?>
 <div>
 <a href="{{ URL::route('provide.index') }}" class="btn btn-info" style="margin-bottom:20px;">Provide</a>
 <a href="{{ URL::route('books.create') }}" class="btn btn-success" style="margin-bottom:20px;">Create New</a>
@@ -28,8 +28,8 @@
                                     }}" class="text-blue">{{ $row->title }}</a></td>
                         <td>{{ $row->author }} </td>
                         <td>
-                            <?php $obj = new Book_User();
-                                echo $obj->countBook($row->id);
+                            <?php $obj = new BookItem();
+                                echo $obj->countBookById($row->id);
                             ?>
                         </td>
                        

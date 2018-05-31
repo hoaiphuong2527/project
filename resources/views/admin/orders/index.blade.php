@@ -1,11 +1,17 @@
 @extends('admin.masterpage.masterpage')
 @section('content')
+<?php use App\Models\User; ?>
 <div>
 <a href="{{ URL::route('orders.create') }}" class="btn btn-success" style="margin-bottom:20px;">Create New</a>
 <br>
 </div>
 <div class="row clearfix progress-box">
    <div class="col-lg-7 col-md-6 col-sm-12 mb-30 pd-20 bg-white border-radius-4 box-shadow mb-30">
+    <span class="help-block">
+        <h5 style="color: red;">
+        {{ $errors->first('error') }}
+        </h5>
+    </span>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -19,14 +25,19 @@
                 @foreach($list as $row)   
                     <tr book-id="{{ $row->id }}">
                         <td>{{ $row->id }}</td>
-                        <td><a href="{{ URL::route('orders.create', ['id' => $row->id,
-                                                                        '_token' => csrf_token()
-                                                                    ])
-                                    }}" class="text-blue">{{ $row->user->name }}</a></td>
-                        <td><ul>
-                            <li>gsgsg</li>
-                            <li>gsgsg</li>
-                        </ul>
+                        <td>{{ $row->borrower->username }}</a></td>
+                        <td>
+                             <?php
+                             $item = App\Models\Order::find($row->id)->orderItems;
+                             foreach ($item as $val) {
+                             $title = App\Models\BookItem::find((int) $val->book_item_id); ?>
+                                 <ul>
+                                    <li>{{ $title->book->title }}</li>
+                                </ul>
+                                <?php
+                             }
+                             ?>
+                        
                         </td>
                         <td  class="text-center">
                             <a href="{{ URL::route('orders.edit', ['id' => $row->id,
@@ -59,7 +70,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-3 col-form-label">Username</label>
                 <div class="col-sm-12 col-md-9">
-                    <input class="form-control" name="title" type="text" value="">
+                    <input class="form-control" name="name" type="text" value="{{ old('name',$name) }}">
                 </div>
             </div>
             <button  class="btn btn-info" style="float: right;">Search</button>
