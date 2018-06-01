@@ -53,13 +53,34 @@
                     </table>
                 </div>
             </div>
-            <hr>
+            <div class="form-group row" style = "width:80%; margin:auto; color: red">
+                <label class="col-sm-12 col-md-4 col-form-label"><i class="fa fa-exclamation" aria-hidden="true"></i> Click on book to remove</label>
+            </div>
+            <div class="form-group row" style = "width:80%; margin:auto;">
+                <label class="col-sm-12 col-md-2 col-form-label">List book</label>
+                <div class="col-sm-12 col-md-10">
+                
+                    <ul id="listSelectBook">
+                        <li>
+                        jfjshf
+                        </li>
+                        <li>
+                        jfjshf
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
         </form>					
    </div>
 </div>
 
 <script type="text/javascript">
+    var selectBookArray = [];
     $(document).ready(function(){
+     
+     var listSelectBook = document.getElementById('listSelectBook');
+
     function fetch_data(query = '')
     {
     $.ajax({
@@ -78,6 +99,7 @@
     fetch_data(query);
     });
     });
+
 </script>
 
 @endsection

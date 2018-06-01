@@ -47,6 +47,9 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="col-md-6 offset-md-4">
+                            <a href="{{ URL::asset('login/google') }}">Login with Google</a>
+                            </div>
                         </div>
 
                         <div class="form-group row mb-0">

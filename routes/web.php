@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login/google', 'Auth\LoginController@redirectToProvider');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
 
 Auth::routes();
 Route::get('/login', ['as'=> 'login',function(){
@@ -21,7 +23,6 @@ Route::get('/login', ['as'=> 'login',function(){
 }]);
 Route::group(['prefix' => '/','middleware' => 'admin'],function(){
     Route::get('/home', 'HomeController@index')->name('home');
-
     //user
     Route::get('/users','UserController@index');
     Route::get('/users/create', [
@@ -137,12 +138,16 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                 ['as' => 'orders.update', 
                 'uses' => 'OrderController@update'
                 ]);
-    Route::get('/orders/delete',
+    Route::get('/orders/delete/{id}',
                 ['as' => 'orders.delete',
                 'uses' => 'OrderController@delete'
                 ]);
     Route::get('/orders/search', [
                     'as' => 'orders.search',
                     'uses' => 'OrderController@search'
+                ]);
+    Route::post('/orders/return_book', [
+                    'as' => 'orders.return',
+                    'uses' => 'OrderController@updateReturnBook'
                 ]);
 });

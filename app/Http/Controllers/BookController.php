@@ -93,7 +93,6 @@ class BookController extends Controller
                 "category_id"    =>$category_id,
                 
                 ]); 
-            
             return redirect('/books')->with('notify-success', 'Thêm item thành công');
         }
     }
@@ -138,7 +137,6 @@ class BookController extends Controller
     public function update(Request $request, BookRepository $bookRepository)
     {
         $id = $request->id;
-        $obj = new Book();
         $validator = Validator::make($request->all(), [
             'title'                  => 'required|min:6|max:30|unique:books,title',
             'author'                 => 'required|min:6|max:30',

@@ -53,4 +53,22 @@ $(document).ready(function () {
         });
     });
 
+    $('.btn-delete-order').click(function() {   
+        var orderId = $(this).parent().parent().attr('order-id'); 
+        $.confirm({
+            title: 'Delele',
+            content: 'Do you want to delete?',
+            columnClass: 'small',
+            buttons: {
+                Yes: function () {
+                    var url = window.location.pathname + '/delete/' + orderId;
+                    window.open(url, "_self");
+                },
+                No: function () {
+                    
+                }
+            }
+        });
+    });
+
 });

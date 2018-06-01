@@ -18,12 +18,13 @@
                 <th scope="col">#</th>
                 <th scope="col">Username</th>
                 <th scope="col">Book</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($list as $row)   
-                    <tr book-id="{{ $row->id }}">
+                    <tr order-id="{{ $row->id }}">
                         <td>{{ $row->id }}</td>
                         <td>{{ $row->borrower->username }}</a></td>
                         <td>
@@ -39,8 +40,15 @@
                              ?>
                         
                         </td>
+                        <td>
+                             @if($row->status == 0)
+                                Borrowing
+                             @else  
+                                Returned
+                             @endif   
+                        </td>
                         <td  class="text-center">
-                            <a href="{{ URL::route('orders.edit', ['id' => $row->id,
+                            <a href="{{ URL::route('orders.return', ['id' => $row->id,
                                                                         '_token' => csrf_token()
                                                                     ])
                                     }}">
@@ -53,7 +61,7 @@
                                 <i class="fa fa-edit f-tb-icon"></i>
                             </a>
                             
-                            <div class=" btn-delete-book">
+                            <div class=" btn-delete-order">
                                 <i class="fa fa-trash-o f-tb-icon"></i>
                             </div>
                         </td>
@@ -71,6 +79,16 @@
                 <label class="col-sm-12 col-md-3 col-form-label">Username</label>
                 <div class="col-sm-12 col-md-9">
                     <input class="form-control" name="name" type="text" value="{{ old('name',$name) }}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-3 col-form-label">Status</label>
+                <div class="col-sm-12 col-md-9">
+                    <select class="custom-select form-control" name="status">
+                            <option value="all" @if ($status == "all") selected @endif>Any</option>
+                            <option value="borrowing" @if ($status == "borrowing") selected @endif>Borrowing</option>
+                            <option value="returned" @if ($status == "returned") selected @endif>Returned</option>
+                    </select>
                 </div>
             </div>
             <button  class="btn btn-info" style="float: right;">Search</button>

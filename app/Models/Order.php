@@ -28,8 +28,8 @@ class Order extends BaseModel
         return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');
     }
 
-    public function getOrderByStatus($search_query)
+    public function getOrders($search_query)
     {
-        return $search_query->where('status',0)->paginate(15);
+        return $search_query->paginate(15);
     }
 }

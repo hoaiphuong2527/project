@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class Admin
 {
@@ -14,11 +15,19 @@ class Admin
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {   if(auth()->user()->user_role == 0)
+    {   
+        if (Auth::check())
         {
-            return $next($request);
-        }
-        else
+            if(auth()->user() != null && (auth()->user()->user_role == 0))
+            {
+                return $next($request);
+            }
+            else
+            {
+                $request->session()->flush();
+                return redirect('login');
+            }
+        }else
         {
             return redirect('login');
         }
