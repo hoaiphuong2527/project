@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\BookItem');
     }
     
+    public function socials()
+    {
+        return $this->hasMany('App\Models\SocialAccount');
+    }
+
     public static function boot() {
         parent::boot();
     }

@@ -248,7 +248,6 @@
 				<td class="container">
 					<div class="content">
 						<!-- START CENTERED WHITE CONTAINER -->
-						<span class="preheader">This is email to confirm your account</span>
 						<table class="main">
 							<!-- START MAIN CONTENT AREA -->
 							<tr>
@@ -259,7 +258,6 @@
 												<p>Hi {{ $username }},</p>
 												<p>Your book(s) is/are about to expire. Please return it/them before the date {{ $expired_date }} </p>
 												<p>This email is auto generated, please don't reply this email</p>
-												<p>Good luck! ^^</p>
 											</td>
 										</tr>
 									</table>

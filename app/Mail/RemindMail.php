@@ -31,6 +31,6 @@ class RemindMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.remind-mail',['username' => $this->username,'expired_date' => $this->expired_date]);
+        return $this->view('admin.mail.remind-mail',['username' => $this->username,'expired_date' => $this->expired_date]);
     }
 }

@@ -48,7 +48,10 @@
                                 </div>
                             </div>
                             <div class="col-md-6 offset-md-4">
-                            <a href="{{ URL::asset('login/google') }}">Login with Google</a>
+                                <a href="{{ URL::asset('login/google') }}">Login with Google</a>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                <a href="{{ URL::asset('login/facebook') }}">Login with Facbook</a>
                             </div>
                         </div>
 

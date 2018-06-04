@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->string('author');
             $table->integer('type');
-            $table->unsignedInteger('category_id')->nullable()->default(null);;
+            $table->unsignedInteger('category_id')->nullable()->default(null);
             $table->timestamps();
             $table->unsignedInteger('created_by')->nullable()->default(null);
             $table->unsignedInteger('updated_by')->nullable()->default(null);

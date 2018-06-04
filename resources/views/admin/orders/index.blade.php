@@ -61,7 +61,7 @@
                                 <i class="fa fa-edit f-tb-icon"></i>
                             </a>
                             
-                            <div class=" btn-delete-order">
+                            <div class="btn-delete-order">
                                 <i class="fa fa-trash-o f-tb-icon"></i>
                             </div>
                         </td>

@@ -14,9 +14,9 @@
 		</div>
 	</div>
     @include('admin.masterpage.script')
-	<script src="{{ URL::asset('admin/js/jquery-confirm.min.js') }}"></script>
 	<script src="{{ URL::asset('admin/js/jquery-3.1.0.min.js')}}"></script>
-    <script src="{{ URL::asset('admin/js/underscore-min.js') }}"></script>
+	<script src="{{ URL::asset('admin/js/jquery-confirm.min.js') }}"></script>
+    	<script src="{{ URL::asset('admin/js/underscore-min.js') }}"></script>
 	<script src="{{ URL::asset('admin/js/admin.js')}}"></script>
 </body>
 </html>

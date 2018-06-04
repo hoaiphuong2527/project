@@ -50,9 +50,9 @@ class UserController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'email'                  => 'required|email|unique:users,email|regex:/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/',
+                'email'                  => 'required|email|unique:users,email|exists:users,email|regex:/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/',
                 'phone'                  => 'required|digits_between:10,15|numeric',
-                'name'                   => 'required|min:6|max:30|unique:users,username',
+                'name'                   => 'required|min:6|max:30|unique:users,username|exists:users,username',
                 'password'               => 'required|min:6|regex:/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/|confirmed',    
                 'role'                   => 'required',
             ]
@@ -72,7 +72,7 @@ class UserController extends Controller
                 [
                 "email"          =>$email, 
                 "phone"          =>$phone_num, 
-                "username"           =>$name,
+                "username"       =>$name,
                 "password"       =>$password,  
                 "user_role"      =>$user_role,
                 ]);
@@ -97,7 +97,7 @@ class UserController extends Controller
         {
             $validator = Validator::make($request->all(), [
                 'phone'                 => 'required|digits_between:10,15|numeric',
-                'name'                  => 'required|min:6|max:30',
+                'name'                  => 'required|min:6|max:30|unique:users,username|exists:users,username',
                 'role'                  => 'required',
                 ],
                 [
@@ -125,7 +125,7 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'password'          => 'required|min:6|regex:/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/|confirmed',
                 'phone'             => 'required|digits_between:10,15|numeric',
-                'name'              => 'required|min:6|max:30||unique:users,username',
+                'name'              => 'required|min:6|max:30|exists:users,username|unique:users,username',
     
                 ],
                 [ 

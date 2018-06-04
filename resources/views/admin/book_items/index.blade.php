@@ -52,7 +52,7 @@
                 <div class="col-sm-12 col-md-9">
                     <select class="custom-select form-control" name="user">
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}" @if (old('user') == $book->id) selected @endif>{{ $user->username }}</option>
+                            <option value="{{ $user->id }}" @if (old('user') == $user->id) selected @endif>{{ $user->username }}</option>
                         @endforeach
                     </select>
                 </div>

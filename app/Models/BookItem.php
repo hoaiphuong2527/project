@@ -12,7 +12,8 @@ class BookItem extends BaseModel
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'book_id'
+        'book_id',
+        'status'
     ];
     protected $guarded = []; 
 

@@ -9,12 +9,14 @@ use Illuminate\Pagination\Paginator;
 class Order extends BaseModel
 {
     protected $table = 'orders';
-
+    public static $snakeAttributes = false;
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'expired_date',
-        'borrower_id'
+        'borrower_id',
+        'return_date',
+        'status'
     ];
     protected $guarded = []; 
 
@@ -32,4 +34,14 @@ class Order extends BaseModel
     {
         return $search_query->paginate(15);
     }
+
+    /**
+     * Get expired order
+     * @param $expired_date
+     */
+    public function scopeExpiredOrder($query, $expired_date)
+    {
+        return $query->where('expired_date', '<', $expired_date)->whereNull('return_date');
+    }
+    
 }

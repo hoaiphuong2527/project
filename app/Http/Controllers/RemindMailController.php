@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\RemindMail;
-use App\Models\User;
+use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,13 +13,14 @@ class RemindMailController extends Controller
     public function send()
     {
         $expired_date = Carbon::now()->addDay(1);
-        $users = User::where('expired_date','<',$expired_date)->get();
+        $orders = Order::expiredOrder($expired_date)->get();
+
         //Send mail
-        foreach($users as $user)
+        foreach($orders as $order)
         {
-            Mail::to($user->email)
-                ->send(new RemindMail($feedback->Name, $feedback->Message));
+            Mail::to($order->borrower->email)
+                ->send(new RemindMail($order->borrower->username, $order->expired_date));
         }
-        
+        return "dsdgs";
     }
 }

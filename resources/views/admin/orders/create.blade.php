@@ -53,20 +53,19 @@
                     </table>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary" type="button" id="btnAddBook">Add book(s)</button>
+                </div>
+            </div>
             <div class="form-group row" style = "width:80%; margin:auto; color: red">
                 <label class="col-sm-12 col-md-4 col-form-label"><i class="fa fa-exclamation" aria-hidden="true"></i> Click on book to remove</label>
             </div>
             <div class="form-group row" style = "width:80%; margin:auto;">
-                <label class="col-sm-12 col-md-2 col-form-label">List book</label>
+                <label class="col-sm-12 col-md-2 col-form-label">List book: </label>
                 <div class="col-sm-12 col-md-10">
                 
                     <ul id="listSelectBook">
-                        <li>
-                        jfjshf
-                        </li>
-                        <li>
-                        jfjshf
-                        </li>
                     </ul>
                     
                 </div>
@@ -78,7 +77,7 @@
 <script type="text/javascript">
     var selectBookArray = [];
     $(document).ready(function(){
-     
+        $("#btnAddBook").hide();
      var listSelectBook = document.getElementById('listSelectBook');
 
     function fetch_data(query = '')
@@ -91,13 +90,40 @@
     success:function(data)
     {
         $('tbody').html(data.table_data);
+        if (data.table_data.length > 0)
+            $("#btnAddBook").show();
+        else
+            $("#btnAddBook").hide();    
     }
     })
     }
-    $(document).on('keyup', '#search', function(){
-    var query = $(this).val();
-    fetch_data(query);
-    });
+        $(document).on('keyup', '#search', function(){
+            var query = $(this).val();
+            fetch_data(query);
+        });
+
+        function trigger_event()
+        {
+            $(".selectedBook").click(function() {
+                var input = $(this).children()[0];
+                selectBookArray.splice(selectBookArray.indexOf(input.value), 1);
+                $(this).remove();
+            });
+        }
+
+        $("#btnAddBook").click(function() {
+            var selectedBook = $("input[name='selectedBook']:checked");
+
+            selectedBook.each(function(index, item) {
+                if (selectBookArray.indexOf(item.value) >= 0)
+                    return;
+                
+                var html = '<li class="selectedBook">'+item.title+' <input type="hidden" name="bookID[]" value="'+item.value+'" /></li>';
+                selectBookArray.push(item.value);
+                $("#listSelectBook").append(html);
+                trigger_event();
+            });
+        });
     });
 
 </script>

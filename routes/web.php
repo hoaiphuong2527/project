@@ -14,8 +14,10 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('login/google', 'Auth\LoginController@redirectToProvider');
-Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
+//Route::get('/send','RemindMailController@send');
+
+Route::get('login/{provide}', 'LoginSocialController@redirectToProvider');
+Route::get('login/{provide}/callback', 'LoginSocialController@handleProviderCallback');
 
 Auth::routes();
 Route::get('/login', ['as'=> 'login',function(){
@@ -146,7 +148,7 @@ Route::group(['prefix' => '/','middleware' => 'admin'],function(){
                     'as' => 'orders.search',
                     'uses' => 'OrderController@search'
                 ]);
-    Route::post('/orders/return_book', [
+    Route::get('/orders/return_book', [
                     'as' => 'orders.return',
                     'uses' => 'OrderController@updateReturnBook'
                 ]);
