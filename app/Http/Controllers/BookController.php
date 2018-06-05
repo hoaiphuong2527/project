@@ -69,7 +69,7 @@ class BookController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title'                  => 'required|min:6|max:30|unique:books,title|exists:books,title',
+                'title'                  => 'required|min:6|max:30|unique:books,title',
                 'author'                 => 'required|min:6|max:30',
                 'category'               => 'required',    
                 'type'                   => 'required',
@@ -139,7 +139,7 @@ class BookController extends Controller
     {
         $id = $request->id;
         $validator = Validator::make($request->all(), [
-            'title'                  => 'required|min:6|max:30|unique:books,title|exists:books,title',
+            'title'                  => 'required|min:6|max:30|unique:books,title',
             'author'                 => 'required|min:6|max:30',
             'category'               => 'required',    
             'type'                   => 'required',
