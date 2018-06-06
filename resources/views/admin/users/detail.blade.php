@@ -8,7 +8,7 @@
         <div class="form-group row">
             <label class="col-sm-12 col-md-3 col-form-label">Username</label>
             <lable class="col-sm-12 col-md-9" style="margin-top: 3px;">
-                {{ $user->name }}
+                {{ $user->username }}
             </lable>
         </div>
         <div class="form-group row">
@@ -26,7 +26,11 @@
         <div class="form-group row">
             <label class="col-sm-12 col-md-3 col-form-label">Role</label>
             <lable class="col-sm-12 col-md-9" style="margin-top: 3px;">
-            {{$user->name}}
+            @if($user->user_role == 1)
+                User
+            @else
+                Admin
+            @endif
             </lable>
         </div>
    </div>
@@ -42,26 +46,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $row)   
-                    <tr user-id="{{ $row->id }}">
-                        <td>{{ $row->id }}</td>
-                        <td><a href="{{ URL::route('user.detail', ['id' => $row->id,
-                                                                        '_token' => csrf_token()
-                                                                    ])
-                                    }}" class="text-blue">{{ $row->username }}</a></td>
-                        <td>{{ $row->email }} </td>
-                        <td>{{ $row->phone }}</td>
-                        <td  class="text-center">
-                            <a href="{{ URL::route('user.edit', ['id' => $row->id,
-                                                                        '_token' => csrf_token()
-                                                                    ])
-                                    }}">
-                                <i class="fa fa-edit f-tb-icon"></i>
-                            </a>
-                            <div class=" btn-delete-user">
-                                <i class="fa fa-trash-o f-tb-icon"></i>
-                            </div>
-                        </td>
+                @foreach($list as $row)   
+                    <tr>
+                        <td><?php $i = 1; echo $i; $i++;?></td>
+                        <td>{{ $row->book_item->book->title }} </td>  
+                        <td>{{ $row->book_item->book->author }} </td>                      
                     </tr>
                 @endforeach
             </tbody>

@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\SocialAccount');
     }
 
+    public function user_book_items()
+    {
+        return $this->hasMany('App\Models\UserBookItem','user_id','id');
+    }
+
     public static function boot() {
         parent::boot();
     }

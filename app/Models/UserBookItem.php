@@ -16,4 +16,14 @@ class UserBookItem extends BaseModel
     ];
     
     protected $guarded = []; 
+
+    public function book_item()
+    {
+        return $this->belongsTo('App\Models\BookItem');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

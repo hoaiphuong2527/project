@@ -31,5 +31,10 @@ class BookItem extends BaseModel
     {
         return BookItem::where('book_id',$id)->count();
     }
+
+    public function user_book_items()
+    {
+        return $this->hasMany('App\Models\UserBookItem','book_item_id','id');
+    }
     
 }

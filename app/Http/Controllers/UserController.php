@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\UserBookItem;
 
 class UserController extends Controller
 {
@@ -162,9 +163,11 @@ class UserController extends Controller
 
     public function detail(Request $request, UserRepository $userRepository)
     {
-       $id = $request->id;
-       $user = User::find((int) $id);
+        $id = $request->id;
+        $user = User::find((int) $id);
+        $uItemBooks = UserBookItem::where('user_id',$user->id)->get();
         $this->roles = config('admin-book.role');
-        return view('admin.users.detail', ['user' => $user, 'roles' =>  $this->roles]);
+        
+        return view('admin.users.detail', ['user' => $user, 'roles' =>  $this->roles,'list' => $uItemBooks]);
     }
 }
