@@ -58,8 +58,8 @@ class CategoryController extends Controller
     public function edit(Request $request)
     {
         $id = $request->id;
-        $cate = new Category();
-        return view('admin.categories.edit', ['cate' => $cate->findCate((int) $id)]);
+        $cate = Category::find($id);
+        return view('admin.categories.edit', ['cate' => $cate]);
 
     }
 
